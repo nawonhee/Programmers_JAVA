@@ -1,0 +1,16 @@
+class Solution {
+    public int solution(int n) {
+        int answer = 0;
+        int piece = 0;
+
+        for(int i=1;i<=6;i++){
+            piece = n*i;
+            if(piece%6==0){
+                break;
+            }
+        }
+        
+        answer = piece/6;
+        return answer;
+    }
+}
