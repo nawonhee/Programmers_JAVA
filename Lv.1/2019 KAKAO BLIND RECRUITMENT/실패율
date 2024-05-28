@@ -1,0 +1,42 @@
+import java.util.Arrays;
+
+class Solution {
+    public int[] solution(int N, int[] stages) {
+        int[] answer = new int[N];
+        double[][] fail = new double[N][2];
+        int[] sum = new int[N+1];
+        
+        
+        for(int s : stages){
+            if(s-1<N){
+                fail[s-1][0] = s;
+                fail[s-1][1]++;
+            }
+            
+            sum[s-1]++;
+        }
+        
+        for(int i=N-1;i>=0;i--){
+            sum[i]+=sum[i+1];
+            System.out.println("sum["+i+"]: "+sum[i]);
+        }
+        
+        for(int i=0;i<N;i++){
+            if(sum[i]!=0){
+                fail[i][1] /= (double) sum[i];
+            }
+            
+            if(fail[i][0]==0){
+                fail[i][0] = i+1;
+            }
+        }
+
+        Arrays.sort(fail,(o1,o2)-> Double.compare(o2[1],o1[1]));
+        
+        for(int i=0;i<N;i++){
+            answer[i] = (int) fail[i][0];
+        }
+        
+        return answer;
+    }
+}
