@@ -1,0 +1,49 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Solution {
+    public int[] solution(int[] emergency) {
+        int[] answer = new int[emergency.length];
+         Integer[] emergency_cpy = Arrays.stream(emergency).boxed().toArray(Integer[]::new);
+        
+        Arrays.sort(emergency_cpy,Comparator.reverseOrder());
+        
+        for(int i=0;i<emergency.length;i++){
+            for(int j=0;j<emergency_cpy.length;j++){
+                if(emergency[i] ==emergency_cpy[j]){
+                    answer[i] = j+1;
+                }
+            }
+        }
+        
+        return answer;
+    }
+}
+
+
+
+
+
+//남의 버전
+
+import java.util.Arrays;
+import java.util.Comparator;
+
+class Solution {
+    public int[] solution(int[] emergency) {
+        int[] answer = new int[emergency.length];
+        
+        for(int i=0;i<emergency.length;i++){
+            answer[i]++;
+            for(int j=0;j<emergency.length;j++){
+                if(emergency[i] < emergency[j]){
+                    answer[i]++;
+                }
+             }    
+
+            
+        }
+        
+        return answer;
+    }
+}
